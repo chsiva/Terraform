@@ -1,0 +1,20 @@
+# install harshicorp terraform latest version
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+brew upgrade hashicorp/tap/terraform
+terraform -v
+--------------------------------------------
+Configure aws
+--------------------------------------------
+mkdir aws-instance
+cd aws-instance
+touch example.tf
+vi example.tf
+cat example.tf
+terraform init
+terraform fmt
+terraform validate
+terraform apply or terraform apply -auto-approve
+terraform show
+terraform state list
+terraform destroy

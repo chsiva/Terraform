@@ -12,7 +12,7 @@ Terraform destroy – to delete the configuration
 Terraform -version -> to check terraform version
 
 
-#Terraform Secrets Management: Hashicorp Vault
+# Terraform Secrets Management: Hashicorp Vault
 
 # What you don’t Like in terraform: 
 

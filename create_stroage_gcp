@@ -1,0 +1,17 @@
+provider "google" {
+  credentials = "${file("service-account.json")}"
+  project = "gcp-dev-300323"
+  region = "us-central1"
+  zone = "us-central1-c"
+}
+
+resource "google_storage_bucket" "my_bucket" {
+  name          = "samplebkt_1"
+  location      = "us-east1"
+  force_destroy = true
+}
+resource "google_storage_bucket_object" "picture" {
+  name   = "gcp_shortcuts"
+  source = "gcp.png"
+  bucket = "samplebkt_1"
+}

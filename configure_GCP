@@ -1,9 +1,13 @@
-brew install google-cloud-sdk
+brew install google-cloud-sdk (not mandatory)
+Go to IAM - service account - create a service account with role as editor -> create key (json).
+
+copy this file to your local project.
+and call this json file into your main.tf
 
 
 provider "google" {
   credentials = "${file("service-account.json")}"
-  project = "gcp-dev-300323"
+  project = "project-id-here"
   region = "us-central1"
   zone = "us-central1-c"
 }

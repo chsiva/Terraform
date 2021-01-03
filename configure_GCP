@@ -1,1 +1,19 @@
 brew install google-cloud-sdk
+
+
+provider "google" {
+  credentials = "${file("service-account.json")}"
+  project = "gcp-dev-300323"
+  region = "us-central1"
+  zone = "us-central1-c"
+}
+
+resource "google_compute_disk" "default" {
+  name  = "test-disk-tf"
+  type  = "pd-ssd"
+  zone  = "us-central1-c"
+  labels = {
+    environment = "dev"
+  }
+  physical_block_size_bytes = 4096
+}

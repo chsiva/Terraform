@@ -61,4 +61,5 @@ But if you want to contribute to the provider, and implement or fix bugs in it, 
   "client_x509_cert_url": ""
 }
 
+# So you could have a .vars file with Vpc value and calling this in main.tf
 

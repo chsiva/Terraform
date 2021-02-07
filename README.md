@@ -7,9 +7,13 @@ Also, I am are pretty much focusing on any kind of like auto scaling groups, elb
 So, that where we try to work heavily with most of the modules within terraform like nested modules, console models, crypto models to make a certain template to mean more reusable and have a will use like terraform version 11. Where I managed most of the state files using like terraform workspaces and terraform file layouts.
 
 # Terraform Script:
-Create a folder->Sample.tf -> Terraform init -> Terraform plan & apply
-Terraform destroy – to delete the configuration
-Terraform -version -> to check terraform version
+Create a folder->Sample.tf 
+
+-> Terraform init---->Terraform plan & apply
+
+->Terraform destroy–---> to delete the configuration
+
+-->Terraform -version -> to check terraform version
 
 
 # Terraform Secrets Management: Hashicorp Vault

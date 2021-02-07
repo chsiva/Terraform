@@ -26,3 +26,10 @@ Terraform -version -> to check terraform version
 
 Terraform is an orchestration tool. Ansible is mainly a configuration management tool (CM); they perform differently but do have some overlaps since these functions are not mutually exclusive. Optimized for various usage and strengths, use these tools for situations.
 
+# Terrofrm plugins
+
+The Terraform AWS provider is a plugin for Terraform that allows for the full lifecycle management of AWS resources.
+
+So, as an end-user you are using AWS provider.
+But if you want to contribute to the provider, and implement or fix bugs in it, you will be doing this in in a context of a plugin in go language.
+

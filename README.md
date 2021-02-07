@@ -37,14 +37,23 @@ But if you want to contribute to the provider, and implement or fix bugs in it, 
 
 {
   "type": "service_account",
+  
   "project_id": "gcp-dev-300323",
+  
   "private_key_id": " ",
+  
   "private_key": "-----BEGIN PRIVATE KEY-----
+  
   "client_email": "terraform-gcp@gcp-dev-300323.iam.gserviceaccount.com",
+  
   "client_id": " ",
+  
   "auth_uri": " ",
+  
   "token_uri": " ",
+  
   "auth_provider_x509_cert_url": " ",
+  
   "client_x509_cert_url": ""
 }
 

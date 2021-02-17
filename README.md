@@ -14,10 +14,10 @@ After the main.tf file is ready, we start setup the CICD process andhave all the
 
 We desbribe the terraform execution steps like Terraform init, plan, apply, destroy in Jenkins file and then we kick off the cicd process. Once this entire process id done it will now deploy the resources into the cloud.
 
-# What you did with Terraform
-Oh, basically, I have used terraform for infrastructure as a code to services on top of cloud providers (AWS/GCP/Azure), In terms of AWS I used terraform especially like Spinning up EC2 instances, s3.
-Also, I am are pretty much focusing on any kind of like auto scaling groups, elbs, so that we're basically we can try to like spinning up either mutable, or immutable infrastructure around.
-So, that where we try to work heavily with most of the modules within terraform like nested modules, console models, crypto models to make a certain template to mean more reusable and have a will use like terraform version 11. Where I managed most of the state files using like terraform workspaces and terraform file layouts.
+# How Terraform will deploy into multiple environments
+
+Depending on the parametered inputs we will choose our environment. we can use a loca file or jenkins file to be parametered in CICD setup. once environemnt is done it kicks off the dev based configuration setup and deploy it not the specific environment.
+
 
 # Terraform Script:
 Create a folder->Sample.tf 

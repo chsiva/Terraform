@@ -1,6 +1,19 @@
 #current version terrafrom 11
 #state file stored in S3
 
+# Terrform VS CFT/ARM
+
+Terraform with increase in uasbility for hybrid cloud deployment. CFT is limitied to only AWS. In terrform we can chosse the provide let be aws/azure/gcp and we can use terroform to provision any kind of resouce in cloud. Also if you want to use Ansible you can use ansible provider and kick it off with Terraform. which comes in very handy and very node productive when comparing to CFT.
+
+
+# Terraform Execution Setup
+
+So let say If we want to provision a Virtual machine in AWS/Azure cloud, what we do is we start doing a main.tf or let say like ec2.tf and we start using by the provider and setting up the keys. For security best practicess we we not store any keys open instead we will encrypt (vault mechanism in CICD process) and call these tokens into the vars file. Then we starting writing the resource blocks to provision ec2 instance.
+
+After the main.tf file is ready, we start setup the CICD process andhave all the dependencies which is listed in the  pipeline as a code which is the jenkins file.
+
+We desbribe the terraform execution steps like Terraform init, plan, apply, destroy in Jenkins file and then we kick off the cicd process. Once this entire process id done it will now deploy the resources into the cloud.
+
 # What you did with Terraform
 Oh, basically, I have used terraform for infrastructure as a code to services on top of cloud providers (AWS/GCP/Azure), In terms of AWS I used terraform especially like Spinning up EC2 instances, s3.
 Also, I am are pretty much focusing on any kind of like auto scaling groups, elbs, so that we're basically we can try to like spinning up either mutable, or immutable infrastructure around.

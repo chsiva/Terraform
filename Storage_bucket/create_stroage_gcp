@@ -19,6 +19,12 @@ variable "bucket_name" {
   default = "sidivayv"
 }
 
+
+
+
+
+
+
 https://upcloud.com/community/tutorials/terraform-variables/
 #Method2
 variable "users" {

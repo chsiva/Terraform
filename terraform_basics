@@ -1,0 +1,5 @@
+main.tf -->
+Terraform init, Terraform plan & apply
+If you want to change the name/config 
+step1: delete the state file & change name in main file & then apply. ( if new one required)
+Step2: just apply so resource will be replaced with a new name

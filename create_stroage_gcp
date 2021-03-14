@@ -6,12 +6,7 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "my_bucket" {
-  name          = "samplebkt_1"
+  name          = var.bucket_name
   location      = "us-east1"
   force_destroy = true
-}
-resource "google_storage_bucket_object" "picture" {
-  name   = "gcp_shortcuts"
-  source = "gcp.png"
-  bucket = "samplebkt_1"
 }

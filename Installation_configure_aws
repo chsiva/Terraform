@@ -18,3 +18,20 @@ terraform apply or terraform apply -auto-approve
 terraform show
 terraform state list
 terraform destroy
+
+#variables.tf
+
+variable "bucket_name" {
+  description = "GCS Bucket name. Value should be unique ."
+  type        = map
+  default     = {
+    "bkt_name" = "samplebkt03"
+}
+
+#main.tf
+resource "google_storage_bucket" "my_bucket" {
+  name          = "var.bucket_name["bkt_name]"
+  location      = "us-east1"
+  force_destroy = true
+}
+

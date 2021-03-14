@@ -1,3 +1,5 @@
+#Main.tf
+
 provider "google" {
   credentials = "${file("service-account.json")}"
   project = "gcp-dev-300323"
@@ -10,3 +12,62 @@ resource "google_storage_bucket" "my_bucket" {
   location      = "us-east1"
   force_destroy = true
 }
+
+# s3var.tf 
+variable "bucket_name" {
+  type = string
+  default = "sidivayv"
+}
+
+https://upcloud.com/community/tutorials/terraform-variables/
+#Method2
+variable "users" {
+  type    = list
+  default = ["root", "user1", "user2"]
+}
+
+username = var.users[0]
+
+#Method3
+variable "plans" {
+  type = map
+  default = {
+    "5USD"  = "1xCPU-1GB"
+    "10USD" = "1xCPU-2GB"
+    "20USD" = "2xCPU-4GB"
+  }
+}
+
+plan = var.plans["5USD"]
+
+output "public_ip" {
+  value = upcloud_server.server_name.network_interface[0].ip_address
+}
+
+output "public_ip" {
+  value = upcloud_server.server_name.network_interface[0].ip_address
+}
+
+output "utility_ip" {
+  value = upcloud_server.server_name.network_interface[1].ip_address
+}
+
+output "hostname" {
+  value = upcloud_server.server_name.hostname
+}
+
+Outputs:
+
+hostname = terraform.example.com
+private_ip = 10.5.4.82
+public_ip = 94.237.45.221
+
+
+
+
+
+
+
+
+
+

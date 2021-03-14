@@ -4,6 +4,7 @@ brew install hashicorp/tap/terraform
 brew upgrade hashicorp/tap/terraform
 terraform -v
 brew upgrade terraform
+brew switch terraform 0.10.2
 --------------------------------------------
 Configure aws
 --------------------------------------------

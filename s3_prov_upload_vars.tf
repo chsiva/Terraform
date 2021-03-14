@@ -30,6 +30,6 @@ resource "google_storage_bucket_object" "picture_upload" {
   source = var.image_path
 }
 
-Run: terraform apply -auto-apply
+Run: terraform apply -auto-approve
 
 

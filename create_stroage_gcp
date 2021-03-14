@@ -2,7 +2,7 @@
 
 provider "google" {
   credentials = "${file("service-account.json")}"
-  project = "gcp-dev-300323"
+  project = "migrationaws2gcp"
   region = "us-central1"
   zone = "us-central1-c"
 }

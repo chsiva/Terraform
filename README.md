@@ -1,6 +1,9 @@
 #current version terrafrom 11
 #state file stored in S3
 
+# Terraform module inside Ansible
+https://medium.com/on-the-cloud/one-click-environment-creation-with-terraform-ansible-in-under-10-6e8d9284f60
+
 # Terrform VS CFT/ARM
 
 Terraform with increase in uasbility for hybrid cloud deployment. CFT is limitied to only AWS. In terrform we can chosse the provide let be aws/azure/gcp and we can use terroform to provision any kind of resouce in cloud. Also if you want to use Ansible you can use ansible provider and kick it off with Terraform. which comes in very handy and very node productive when comparing to CFT.

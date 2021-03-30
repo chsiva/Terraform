@@ -21,6 +21,14 @@ terraform show
 terraform state list
 terraform destroy
 
+--------
+sudo wget https://releases.hashicorp.com/terraform/0.14.9/terraform_0.14.9_linux_amd64.zip
+   75  ls
+   76  unzip terraform_0.14.9_linux_amd64.zip 
+   77  ls
+   78  sudo mv terraform /usr/bin/
+----------
+
 #variables.tf
 
 variable "bucket_name" {

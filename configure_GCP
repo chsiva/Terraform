@@ -1,4 +1,4 @@
-brew install google-cloud-sdk (not mandatory)
+## brew install google-cloud-sdk (not mandatory)
 
 Go to IAM - service account - create a service account with role as editor -> create key (json).
 

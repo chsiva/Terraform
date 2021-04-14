@@ -87,21 +87,6 @@ pipeline {
                 input 'Are you sure? Review the output of the previous step before proceeding!'
             }
         }
-
-        stage('TerraApplying') {
-            when {
-                expression { !params.destroy }
-            }
-            steps {
-                withCredentials([file(credentialsId: 'Project', variable: 'Project')]) {
-                sh '''#!/bin/bash -l
-                  echo "Terraform Apply"
-                  set +x
-                  ./terraform apply current.tfplan
-                  '''
-            }
-        }
-        }
         stage('Clean Workspace'){
             steps {
                 sh '''#!/bin/bash -l

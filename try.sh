@@ -8,3 +8,4 @@ echo "disk space"
 df -h
 echo "list gcs in my project"
 gsutil ls
+

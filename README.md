@@ -2,6 +2,7 @@
 #state file stored in S3
 
 # Terraform module inside Ansible
+https://docs.ansible.com/ansible/2.9/modules/terraform_module.html
 https://medium.com/on-the-cloud/one-click-environment-creation-with-terraform-ansible-in-under-10-6e8d9284f60
 
 # Terrform VS CFT/ARM
@@ -43,8 +44,7 @@ Create a folder->Sample.tf
 5.	No way to Rollback. So, we need to destroy everything and re-run if required.
 
 # Terraform Vs Ansible
-
-Terraform is an orchestration tool. Ansible is mainly a configuration management tool (CM); they perform differently but do have some overlaps since these functions are not mutually exclusive. Optimized for various usage and strengths, use these tools for situations.
+https://cloudify.co/blog/ansible-vs-terraform/
 
 # Terrofrm plugins
 

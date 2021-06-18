@@ -44,6 +44,8 @@ Create a folder->Sample.tf
 5.	No way to Rollback. So, we need to destroy everything and re-run if required.
 
 # Terraform Vs Ansible
+Lifecycle management of infrastructure lends itself to a Terraform declarative approach, whereas the imperative approach of Ansible is better suited to configuration management because of its customizability.
+
 https://cloudify.co/blog/ansible-vs-terraform/
 
 # Terrofrm plugins

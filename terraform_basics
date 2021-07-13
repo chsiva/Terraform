@@ -3,3 +3,14 @@ Terraform init, Terraform plan & apply
 If you want to change the name/config 
 step1: delete the state file & change name in main file & then apply. ( if new one required)
 Step2: just apply so resource will be replaced with a new name
+
+
+
+# What is terraform.tfstate and terraform.tfstate.backup file in terraform?
+The state file is used by Terraform to keep track of resources and metadata information about your infrastructure. 
+By default, the state of your environment is stored locally in your Terraform workspace directory in a file called terraform.tfstate along with a backup file 
+called terraform.tfstate.backup. 
+The state file will not exist until you have completed at least one terraform apply.
+
+So, When you run terraform apply then the state will be updated if changes have been made. 
+The previous version will be saved as terraform.tfstate.backup.

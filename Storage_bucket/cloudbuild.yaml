@@ -7,3 +7,7 @@ steps:
 # # Clone a private repo belonging to the project.
 # - name: 'gcr.io/$PROJECT_ID/git'
 #   args: ['clone', 'https://source.developers.google.com/p/$PROJECT_ID/r/default']
+
+# https://cloud.google.com/build/docs/overview
+
+# https://github.com/GoogleCloudPlatform/cloud-builders/tree/master/git

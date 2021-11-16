@@ -52,10 +52,14 @@ https://cloudify.co/blog/ansible-vs-terraform/
 
 # Terrofrm plugins
 
+Terraform Plugins: These are executable binaries written in Go that communicate with Terraform Core over an RPC interface. Each plugin exposes an implementation for a specific service, such as the AWS provider or the cloud-init provider.
+
 The Terraform AWS provider is a plugin for Terraform that allows for the full lifecycle management of AWS resources.
 
 So, as an end-user you are using AWS provider.
 But if you want to contribute to the provider, and implement or fix bugs in it, you will be doing this in in a context of a plugin in go language.
+
+~/.terraform.d/plugins for Linux and MacOS.
 
 # inside Json file
 

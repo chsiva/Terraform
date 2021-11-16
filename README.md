@@ -21,6 +21,8 @@ Terraform has detailed logs which can be enabled by setting the TF_LOG environme
 
 For ex: export TF_LOG="DEBUG" in shell
 
+Bash: export TF_LOG_PATH="tmp/terraform.log"
+
 
 # Terraform Execution Setup
 

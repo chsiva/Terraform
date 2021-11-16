@@ -16,6 +16,11 @@ Terraform with increase in uasbility for hybrid cloud deployment. CFT is limitie
 
 If your infrastructure relies on many third-party resources, Terraform might be a better fit.
 
+# How you will see logs in terraform
+Terraform has detailed logs which can be enabled by setting the TF_LOG environment variable to any value. This will cause detailed logs to appear on stderr. You can set TF_LOG to one of the log levels TRACE , DEBUG , INFO , WARN or ERROR to change the verbosity of the logs.
+
+For ex: export TF_LOG="DEBUG" in shell
+
 
 # Terraform Execution Setup
 

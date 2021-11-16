@@ -4,7 +4,7 @@
 Inside terraform repo -> Modules, Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
 
 # workspaces: environment variables (env.auto.tf.vars)
-Workspaces in Terraform are simply independently managed state files. A workspace contains everything that Terraform needs to manage a given collection of infrastructure, and separate Workspaces function like completely separate working directories. We can manage multiple environments with Workspaces
+Workspaces in Terraform are simply independently managed state files. A workspace "contains everything that Terraform needs to manage a given collection of infrastructure", and separate Workspaces function like completely separate working directories. We can manage multiple environments with Workspaces
 
 # Terraform module inside Ansible
 https://docs.ansible.com/ansible/2.9/modules/terraform_module.html

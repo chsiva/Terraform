@@ -1,5 +1,7 @@
 #current version terrafrom 11
 #state file stored in S3
+# terraform folder structure
+Inside terraform repo -> Modules, Providers, main.tf, vars.tf, output.tf
 
 # Terraform module inside Ansible
 https://docs.ansible.com/ansible/2.9/modules/terraform_module.html

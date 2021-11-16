@@ -1,7 +1,10 @@
 #current version terrafrom 11
 #state file stored in S3
 # terraform folder structure
-Inside terraform repo -> Modules, Providers, main.tf, vars.tf, output.tf
+Inside terraform repo -> Modules, Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
+
+# workspaces: environment variables (env.auto.tf.vars)
+Workspaces in Terraform are simply independently managed state files. A workspace contains everything that Terraform needs to manage a given collection of infrastructure, and separate Workspaces function like completely separate working directories. We can manage multiple environments with Workspaces
 
 # Terraform module inside Ansible
 https://docs.ansible.com/ansible/2.9/modules/terraform_module.html
@@ -10,6 +13,8 @@ https://medium.com/on-the-cloud/one-click-environment-creation-with-terraform-an
 # Terrform VS CFT/ARM
 
 Terraform with increase in uasbility for hybrid cloud deployment. CFT is limitied to only AWS. In terrform we can chosse the provide let be aws/azure/gcp and we can use terroform to provision any kind of resouce in cloud. Also if you want to use Ansible you can use ansible provider and kick it off with Terraform. which comes in very handy and very node productive when comparing to CFT.
+
+If your infrastructure relies on many third-party resources, Terraform might be a better fit.
 
 
 # Terraform Execution Setup

@@ -38,7 +38,7 @@ EOF }
 # Create Cloudfront distribution
 resource "aws_cloudfront_distribution" "prod_distribution" {
     origin {
-        domain_name = "${aws_s3_bucket.prod.website_endpoint}"
+        domain_name = "<domain-name-here>"
         origin_id = "S3-${aws_s3_bucket.prod.bucket}"
         custom_origin_config {
             http_port = 80

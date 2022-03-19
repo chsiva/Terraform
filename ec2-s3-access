@@ -1,33 +1,51 @@
-# access s3
+# access s3, ec2, SSM
 
-module "policy-s3-full-access" {
-  source  = "mineiros-io/iam-policy/aws"
-  version = "~> 0.5.0"
-
-  # name of the policy
-  name = "S3FullAccess"
-
-  # construct the policy document granting access from the following statements
-  policy_statements = [
-    {
-      sid = "S3FullAccess"
-
-      effect    = "Allow"
-      actions   = ["s3:*"]
-      resources = ["*"]
-    }
-  ]
+resource "aws_iam_role" "example" {
+  name                = "test_role_to_access_multiple_services"
+  assume_role_policy  = data.aws_iam_policy_document.instance_assume_role_policy.json # Policy on line 11, 26, 41 that grants an entity permission to assume the role.
 }
 
-# access ec2
-module "ec2-iam-role" {
-  source  = "Smartbrood/ec2-iam-role/aws"
-  name    = "ec2-iam-role"
-  version = "0.3.0"
+resource "aws_iam_policy" "policy_one" {
+  name = "policy-618033"
 
-  policy_arn = [
-    "arn:aws:iam::aws:policy/AmazonEC2ReadOnlyAccess",
-    "arn:aws:iam::aws:policy/CloudWatchReadOnlyAccess",
-  ]
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = ["ec2:Describe*"]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
 }
 
+resource "aws_iam_policy" "policy_two" {
+  name = "policy-381966"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = ["s3:List*"]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}
+
+resource "aws_iam_policy" "policy_three" {
+  name = "policy-381966"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action   = ["ssm:Describe*"]
+        Effect   = "Allow"
+        Resource = "*"
+      },
+    ]
+  })
+}

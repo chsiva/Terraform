@@ -1,7 +1,7 @@
 #Basics
 
     Language: HCL
-    current version terrafrom 0.12, 0.13,0.14, 0.15
+    current version terrafrom  > 1.3-1.5 are latest
     state file stored in AWS S3/GCP Cloud storage
     
 # terraform folder structure
@@ -43,8 +43,13 @@ project-root/
    ![image](https://github.com/user-attachments/assets/2059c7a6-a297-4db0-b00b-f9354a7409fb)
 
 
+# Terrofm Issues
 
-
+    * statefile lock - remove
+    * corrupted statefile - 
+    * incompatible with provider version - module of GCP outdated
+    * Error code 409 - Resource not found
+    * 
 # Terraform module inside Ansible
 https://docs.ansible.com/ansible/2.9/modules/terraform_module.html
 https://medium.com/on-the-cloud/one-click-environment-creation-with-terraform-ansible-in-under-10-6e8d9284f60

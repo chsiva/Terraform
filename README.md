@@ -1,10 +1,49 @@
-#current version terrafrom 11
-#state file stored in S3
-# terraform folder structure
-Inside terraform repo -> Modules, Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
+#Basics
 
-# workspaces: environment variables (env.auto.tf.vars)
-Workspaces in Terraform are simply independently managed state files. A workspace "contains everything that Terraform needs to manage a given collection of infrastructure", and separate Workspaces function like completely separate working directories. We can manage multiple environments with Workspaces
+    Language: HCL
+    current version terrafrom 0.12, 0.13,0.14, 0.15
+    state file stored in AWS S3/GCP Cloud storage
+    
+# terraform folder structure
+
+Inside terraform repo -> Modules , Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
+
+project-root/
+├── .gitignore
+├── main.tf
+├── provider.tf
+├── variables.tf
+├── outputs.tf
+├── terraform.tfvars
+├── .terraform/                # Terraform-generated state and modules
+├── modules/                   # Reusable modules for different resources
+│   ├── network/               # Network module (e.g., VPC, subnets)
+│   ├── compute/               # Compute module (e.g., VM, instance groups)
+│   └── storage/               # Storage module (e.g., Cloud Storage buckets)
+├── workspaces/                # Subdirectories for different workspaces
+│   ├── dev/                   # Development workspace
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   ├── terraform.tfvars
+│   │   └── provider.tf        # Workspace-specific provider configurations
+│   ├── staging/               # Staging workspace
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   ├── terraform.tfvars
+│   │   └── provider.tf
+│   └── production/            # Production workspace
+│       ├── main.tf
+│       ├── variables.tf
+│       ├── terraform.tfvars
+│       └── provider.tf
+
+
+# Terraform commnds
+
+   ![image](https://github.com/user-attachments/assets/2059c7a6-a297-4db0-b00b-f9354a7409fb)
+
+
+
 
 # Terraform module inside Ansible
 https://docs.ansible.com/ansible/2.9/modules/terraform_module.html

@@ -9,34 +9,34 @@
     Inside terraform repo -> 
       Modules , Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
 
-project-root/
-├── .gitignore
-├── main.tf
-├── provider.tf
-├── variables.tf
-├── outputs.tf
-├── terraform.tfvars
-├── .terraform/                # Terraform-generated state and modules
-├── modules/                   # Reusable modules for different resources
-│   ├── network/               # Network module (e.g., VPC, subnets)
-│   ├── compute/               # Compute module (e.g., VM, instance groups)
-│   └── storage/               # Storage module (e.g., Cloud Storage buckets)
-├── workspaces/                # Subdirectories for different workspaces
-│   ├── dev/                   # Development workspace
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   ├── terraform.tfvars
-│   │   └── provider.tf        # Workspace-specific provider configurations
-│   ├── staging/               # Staging workspace
-│   │   ├── main.tf
-│   │   ├── variables.tf
-│   │   ├── terraform.tfvars
-│   │   └── provider.tf
-│   └── production/            # Production workspace
-│       ├── main.tf
-│       ├── variables.tf
-│       ├── terraform.tfvars
-│       └── provider.tf
+        project-root/
+        ├── .gitignore
+        ├── main.tf
+        ├── provider.tf
+        ├── variables.tf
+        ├── outputs.tf
+        ├── terraform.tfvars
+        ├── .terraform/                # Terraform-generated state and modules
+        ├── modules/                   # Reusable modules for different resources
+        │   ├── network/               # Network module (e.g., VPC, subnets)
+        │   ├── compute/               # Compute module (e.g., VM, instance groups)
+        │   └── storage/               # Storage module (e.g., Cloud Storage buckets)
+        ├── workspaces/                # Subdirectories for different workspaces
+        │   ├── dev/                   # Development workspace
+        │   │   ├── main.tf
+        │   │   ├── variables.tf
+        │   │   ├── terraform.tfvars
+        │   │   └── provider.tf        # Workspace-specific provider configurations
+        │   ├── staging/               # Staging workspace
+        │   │   ├── main.tf
+        │   │   ├── variables.tf
+        │   │   ├── terraform.tfvars
+        │   │   └── provider.tf
+        │   └── production/            # Production workspace
+        │       ├── main.tf
+        │       ├── variables.tf
+        │       ├── terraform.tfvars
+        │       └── provider.tf
 
 
 # Terraform commnds

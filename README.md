@@ -1,8 +1,32 @@
+# Terraform
+    Terraform is an Infrastructure as Code (IaC) tool that can create immutable infrastructure. 
+      immutable infrastructure means that once you deploy a server or other infrastructure component, you never modify it directly
+
 #Basics
 
     Language: HCL
     current version terrafrom  > 1.3-1.9 are latest
     state file stored in AWS S3/GCP Cloud storage
+      
+# Updating Labels or Tags on an Immutable EC2 Instance:
+
+    This is where the concept of immutability might seem to conflict with direct updates:
+    - Internal configuration changes: 
+         Changes made inside the running EC2 instance (such as updating an application or patching the OS). These should be handled by replacing the instance.
+    - External metadata or attributes: Changes to the resource itself, like its labels (tags in AWS terminology). These can often be updated in place by the cloud provider's API. 
+
+#Terraform recreating vm with updating config
+
+    When you run terraform apply with this updated configuration,
+       Terraform will plan to destroy the old instance and create a new one with the new AMI. 
+
+# Avoid dataloss
+    seperate data volume [ persistent volumes (like EBS volumes in AWS) ]
+    Attach old data voulmes this to new VM
+    Mount Volumes Without Reformatting: 
+    Backup and Recovery Strategies like "snapshot"
+    prevent_destroy = true # this will block perform action but will not create a new vm as well
+
     
 # terraform folder structure
 
@@ -46,10 +70,27 @@
 
 # Terrofm Issues
 
-    * statefile lock - remove
+    * statefile lock removal  = $terraform force-unlock <lock-id>
+         The lock ID is generally shown in the error message
+         Note: To prevent users from removing the lock, 
+                 use platforms like Terraform Cloud/Enterprise, 
+                 set up automated processes, and control access to the state file [5].
+         
     * corrupted statefile - 
+         Delete the statefile and get the backfile stored from GCS bucket
+         file: terraform.tfstate.backup
+          
+           Steps to Restore from terraform.tfstate.backup:
+                Rename: Rename the terraform.tfstate.backup file to terraform.tfstate.
+                Initialize: Run terraform init.
+                Apply: Run terraform apply to apply the changes to your infrastructure. 
+
     * incompatible with provider version - module of GCP outdated
+    
     * Error code 409 - Resource not found
+       Remove Resource from State:
+          If the conflict is due to an interrupted apply or inconsistent state, 
+              you might need to use terraform state rm <resource_name> to remove the resource from the state and then terraform import to re-add it correctly.
     * 
 # Terraform module inside Ansible
 https://docs.ansible.com/ansible/2.9/modules/terraform_module.html
@@ -62,11 +103,11 @@ Terraform with increase in uasbility for hybrid cloud deployment. CFT is limitie
 If your infrastructure relies on many third-party resources, Terraform might be a better fit.
 
 # How you will see logs in terraform
-Terraform has detailed logs which can be enabled by setting the TF_LOG environment variable to any value. This will cause detailed logs to appear on stderr. You can set TF_LOG to one of the log levels TRACE , DEBUG , INFO , WARN or ERROR to change the verbosity of the logs.
+Terraform has detailed logs which can be enabled by setting the "TF_LOG environment variable to any value". This will cause detailed logs to appear on stderr. You can set TF_LOG to one of the log levels TRACE , DEBUG , INFO , WARN or ERROR to change the verbosity of the logs.
 
-For ex: export TF_LOG="DEBUG" in shell
-
-Bash: export TF_LOG_PATH="tmp/terraform.log"
+    For ex: export TF_LOG="DEBUG" in shell
+    
+    Bash: export TF_LOG_PATH="tmp/terraform.log"
 
 
 # Terraform Execution Setup

@@ -127,9 +127,55 @@
 
     - Drift Detection: Recognizing and addressing when your live infrastructure deviates from the desired state defined in your Terraform code, 
                        often caused by manual changes outside of Terraform's control.
+              
+               Import configuration $terraform import aws_s3_bucket.my_bucket my-existing-bucket
 
-       Solution: Import configuration $terraform import aws_s3_bucket.my_bucket my-existing-bucket
+       Solution: 
+         - avoiding manual modifications directly in the cloud console or CLI
+         - Automate Deployments (CI/CD)
+         - Use Remote State and State Locking
+         - Use Terraform, where infra is immutable rather than update
     * 
+    - Rolling Updates: 
+         Implementing strategies like create_before_destroy or Blue/Green deployments to update infrastructure incrementally without causing downtime.
+         
+        - create_before_destroy Meta-Argument:
+                resource "aws_instance" "web_server" {
+                  ami           = "ami-old-version" # Old AMI ID
+                  instance_type = "t2.micro"
+                  # ... other configurations ...
+                
+                  lifecycle {
+                    create_before_destroy = true
+                  }
+                }
+
+           When you update the ami to a new version, Terraform will launch a new EC2 instance with the new AMI before terminating the old one.
+
+        - Blue/Green Deployment
+
+            resource "aws_s3_bucket" "blue_environment" {
+              bucket = "my-app-blue"
+              # ... configuration for blue environment ...
+            }
+            
+            resource "aws_s3_bucket" "green_environment" {
+              bucket = "my-app-green"
+              # ... configuration for green environment (updated version) ...
+            }
+            
+            resource "aws_elb" "app_load_balancer" {
+              # ... load balancer configuration ...
+              instances = [aws_instance.blue_instance.id] # Initially pointing to blue
+            }
+
+            To switch to Green, you would update the instances attribute of the load balancer to point to the Green environment's instances and apply the change with Terraform
+
+
+            In conclusion, Terraform empowers you to implement robust rolling update strategies like create_before_destroy and Blue/Green deployments to ensure continuous availability and minimize downtime during infrastructure updates. By leveraging these techniques and combining them with careful planning and automation, you can achieve safe and predictable deployments of your infrastructure.
+           
+        
+
 # Terraform module inside Ansible
 https://docs.ansible.com/ansible/2.9/modules/terraform_module.html
 https://medium.com/on-the-cloud/one-click-environment-creation-with-terraform-ansible-in-under-10-6e8d9284f60

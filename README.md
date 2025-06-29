@@ -139,7 +139,7 @@
     - Rolling Updates: 
          Implementing strategies like create_before_destroy or Blue/Green deployments to update infrastructure incrementally without causing downtime.
          
-        - create_before_destroy Meta-Argument:
+         *** create_before_destroy Meta-Argument ***
                 resource "aws_instance" "web_server" {
                   ami           = "ami-old-version" # Old AMI ID
                   instance_type = "t2.micro"
@@ -152,7 +152,7 @@
 
            When you update the ami to a new version, Terraform will launch a new EC2 instance with the new AMI before terminating the old one.
 
-        - Blue/Green Deployment
+          *** Blue/Green Deployment ***
 
             resource "aws_s3_bucket" "blue_environment" {
               bucket = "my-app-blue"
@@ -173,8 +173,98 @@
 
 
             In conclusion, Terraform empowers you to implement robust rolling update strategies like create_before_destroy and Blue/Green deployments to ensure continuous availability and minimize downtime during infrastructure updates. By leveraging these techniques and combining them with careful planning and automation, you can achieve safe and predictable deployments of your infrastructure.
-           
+
+
+    - Dependency Management: Handling resource dependencies, mainly by favoring implicit dependencies (Terraform automatically infers them) 
+                             and using explicit dependencies (depends_on) only when necessary for complex scenarios.
+
+         resource "resource_type" "resource_name" {
+          # ... resource configuration ...
+          depends_on = [resource_type.dependent_resource_name, module.dependent_module_name]
+        }
+        ```
+        Note: reusable
+
+    - Multi-Cloud Deployments: Using Terraform to manage infrastructure across different cloud providers within a single configuration.
+
+                            # Define the AWS provider
+                            provider "aws" {
+                              region = "us-east-1" # Specify your desired AWS region
+                            }
+                            
+                            # Define the Google Cloud provider
+                            provider "google" {
+                              project = "your-gcp-project-id" # Replace with your GCP project ID
+                              region  = "us-central1"        # Specify your desired GCP region
+                            }
+                            
+                            # AWS: Create an EC2 instance
+                            resource "aws_instance" "my_aws_vm" {
+                              ami           = "ami-0abcdef1234567890"  # Replace with a valid AMI ID
+                              instance_type = "t2.micro"
+                              tags = {
+                                Name = "MyAWSVM"
+                              }
+                            }
+                            
+                            # GCP: Create a Compute Engine instance
+                            resource "google_compute_instance" "my_gcp_vm" {
+                              name         = "my-gcp-vm"
+                              machine_type = "e2-medium" # Specify your desired machine type
+                              zone         = "us-central1-a"  # Specify your desired zone
+                            
+                              boot_disk {
+                                initialize_params {
+                                  image = "debian-cloud/debian-10" # Specify your desired image
+                                }
+                              }
+                            
+                              network_interface {
+                                network = "default" # Use the default network or specify a custom one
+                                access_config {
+                                  // Ephemeral IP
+                                }
+                              }
+                            }
+                            
+                - Provider Blocks: The aws and google providers are defined in the configuration. 
+                                   Credentials for each provider are needed to allow Terraform to authenticate and interact with your cloud accounts.
+                - Resource Definitions:
+                       aws_instance.my_aws_vm: Defines an EC2 instance in AWS.
+                       google_compute_instance.my_gcp_vm: Defines a Compute Engine instance in GCP.
+                - Resource-Specific Attributes: Each resource block uses attributes specific to the corresponding cloud provider to configure the resource
+                                                (e.g., ami and instance_type for AWS, machine_type and zone for GCP).
+                - Implicit Dependencies: In this example, there are no explicit dependencies between the AWS and GCP resources. 
+                                          Terraform can provision them in parallel. 
+                                          If there were dependencies (e.g., a GCP instance needing to access an AWS resource), 
+                                               depends_on or outputs would be used to manage those relationships.
+                Running Terraform terraform init, terraform plan, and terraform apply initializes the project, previews the changes, and provisions the VMs in both AWS and GCP. 
+
+     
+
+        - Terraform tains & untaint
         
+           You are correct that the terraform taint command is deprecated in newer versions of Terraform, and using terraform apply -replace is the recommended alternative. 
+
+                resource "google_compute_instance" "example" {
+                  count = 3  # Creates 3 instances
+                  name         = "my-instance-${count.index}"
+                  machine_type = "e2-medium"
+                  zone         = "us-central1-a"
+                
+                  boot_disk {
+                    initialize_params {
+                      image = "debian-cloud/debian-10"
+                    }
+                  }
+                
+                  network_interface {
+                    network = "default"
+                  }
+                }
+           
+              Note: Running terraform apply -replace="google_compute_instance.example[0]" 
+                    will force the replacement of the first instance created by this configuration (the one named "my-instance-0")
 
 # Terraform module inside Ansible
 https://docs.ansible.com/ansible/2.9/modules/terraform_module.html

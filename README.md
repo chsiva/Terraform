@@ -19,6 +19,7 @@
 
     When you run terraform apply with this updated configuration,
        Terraform will plan to destroy the old instance and create a new one with the new AMI. 
+       Example: machine type, machine image, moving vm a different subnet, GCS bucket ( name, location)
 
 # Avoid dataloss
     seperate data volume [ persistent volumes (like EBS volumes in AWS) ]

@@ -28,6 +28,40 @@
     Backup and Recovery Strategies like "snapshot"
     prevent_destroy = true # this will block perform action but will not create a new vm as well
 
+#Avoid other users to remove/release lock
+
+   How it works (example with GCS bucket):  lockfile will be 
+   
+       - Configure your Terraform configuration: You'll specify the S3 bucket where the state file will be stored and the DynamoDB table for locking in the backend block.
+       - Initialize Terraform: When you run terraform init, Terraform sets up the remote backend and enables state locking.
+       - Run a command (e.g., terraform apply): Terraform checks the DynamoDB table for an existing lock.
+       - Acquire lock: If no lock exists, Terraform creates one in the DynamoDB table. This prevents others from running commands that would modify the state.
+       - Perform operation: Terraform proceeds with the requested operation (e.g., applying changes).
+       - Release lock: Once the operation is complete, Terraform releases the lock in the DynamoDB table. 
+       
+        terraform {
+          backend "s3" {
+            bucket         = "your-terraform-state-bucket"  # Replace with your bucket name
+            key            = "terraform/state"              # Path to your state file
+            region         = "us-west-2"                    # AWS region
+            dynamodb_table = "terraform-lock-table"         # Replace with your DynamoDB table name
+          }
+        }
+
+        This configuration tells Terraform to store the state file in the specified S3 bucket at the given key 
+               and to use the terraform-lock-table DynamoDB table for state locking
+
+        Example of Lock Information in DynamoDB:
+            When a Terraform command like terraform apply is run and acquires a lock,
+            an item will be created in your DynamoDB lock table. You can view this item using the AWS CLI: 
+            
+            $aws dynamodb scan --table-name terraform-lock-table --profile=<your_aws_profile>
+            $aws dynamodb scan --table-name <your_lock_table_name> --profile=<your_aws_profile>
+
+           
+
+
+
     
 # terraform folder structure
 
@@ -62,6 +96,7 @@
         │       ├── variables.tf
         │       ├── terraform.tfvars
         │       └── provider.tf
+
 #TERRAFORM .tpl or .tftpl extension
 
     In Terraform, a file with a .tpl or .tftpl extension is typically a template file. 

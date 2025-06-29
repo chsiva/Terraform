@@ -1,12 +1,13 @@
 #Basics
 
     Language: HCL
-    current version terrafrom  > 1.3-1.5 are latest
+    current version terrafrom  > 1.3-1.9 are latest
     state file stored in AWS S3/GCP Cloud storage
     
 # terraform folder structure
 
-Inside terraform repo -> Modules , Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
+    Inside terraform repo -> 
+      Modules , Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
 
 project-root/
 ├── .gitignore

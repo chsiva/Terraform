@@ -4,6 +4,7 @@
       lockfile: .terraform.lock.hcl
       statefile: terraform.tfstate
       backupfile; terraform.tfstate.backup
+    HashiCorp Configuration Language (HCL)
 
 #Basics
 

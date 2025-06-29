@@ -61,7 +61,35 @@
         │       ├── variables.tf
         │       ├── terraform.tfvars
         │       └── provider.tf
+#TERRAFORM .tpl or .tftpl extension
 
+    In Terraform, a file with a .tpl or .tftpl extension is typically a template file. 
+    These template files are used to dynamically generate text-based content, 
+        such as configuration files, scripts, or user data, based on data provided by Terraform. 
+
+        Example:
+        
+        Let's say you have a template file named user_data.tftpl to configure an EC2 instance: 
+        
+        bash
+        
+        #!/bin/bash
+        echo "Hello, ${username}!" > /home/ec2-user/welcome.txt
+        Use code with caution.
+        
+        In your Terraform configuration, you can use the templatefile function to dynamically set the username and use this template as the user_data for your EC2 instance: 
+        terraform
+        resource "aws_instance" "web" {
+          ami           = "ami-12345678"
+          instance_type = "t2.micro"
+          user_data     = templatefile("${path.module}/user_data.tftpl", {
+            username = "Terraform User"
+          })
+        }
+        Use code with caution.
+        
+        This will generate a user data script that, when the instance launches, will write "Hello, Terraform User!" to a file named welcome.txt. 
+        AI responses may include mistakes. Learn more
 
 # Terraform commnds
 

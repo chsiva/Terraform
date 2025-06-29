@@ -1,6 +1,9 @@
 # Terraform
     Terraform is an Infrastructure as Code (IaC) tool that can create immutable infrastructure. 
       immutable infrastructure means that once you deploy a server or other infrastructure component, you never modify it directly
+      lockfile: .terraform.lock.hcl
+      statefile: terraform.tfstate
+      backupfile; terraform.tfstate.backup
 
 #Basics
 

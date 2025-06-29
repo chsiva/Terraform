@@ -119,6 +119,16 @@
        Remove Resource from State:
           If the conflict is due to an interrupted apply or inconsistent state, 
               you might need to use terraform state rm <resource_name> to remove the resource from the state and then terraform import to re-add it correctly.
+
+
+
+
+#Terraform Advance querstions
+
+    - Drift Detection: Recognizing and addressing when your live infrastructure deviates from the desired state defined in your Terraform code, 
+                       often caused by manual changes outside of Terraform's control.
+
+       Solution: Import configuration $terraform import aws_s3_bucket.my_bucket my-existing-bucket
     * 
 # Terraform module inside Ansible
 https://docs.ansible.com/ansible/2.9/modules/terraform_module.html

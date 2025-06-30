@@ -13,15 +13,6 @@
     state file stored in AWS S3/GCP Cloud storage
 
 # differences between Terraform Modules, Resources, Providers, and Workspaces in a simple way:
-Feature	Providers	Resources	Modules	Workspaces
-What it is	Connectors/plugins to interact with services	Individual infrastructure components	Reusable packages of related resources	Isolated environments within one configuration
-Purpose	Allow Terraform to manage resources on specific platforms (e.g., AWS, GCP, Azure)	Define desired state of infrastructure objects	Group related resources for reusability & organization	Manage multiple environments with separate state
-How it's used	Declared in configuration to enable resource types	Defined in HCL to create infrastructure objects	Declared as blocks to encapsulate and reuse configurations	Managed via terraform workspace commands
-Scope	Platform-specific (e.g., GCP provider for GCP resources)	Specific infrastructure objects (e.g., an EC2 instance)	Bundles of resources, reusable across configurations	Isolated state for different deployments of the same configuration
-Example	google provider	google_compute_instance resource	A module for creating a VPC network with subnets and routing	"dev", "staging", "prod" workspaces
-Key Benefit	Enables interaction with external services	Creates and manages infrastructure objects	Reusability, organization, and abstraction	Isolation of state for different environments
-Relation	Provide resources	Are the building blocks	Encapsulate resources	Manage separate state for configurations using modules and resources
-
 
 In simpler terms:
 Providers: The tool that helps Terraform talk to a specific service (like GCP or AWS).

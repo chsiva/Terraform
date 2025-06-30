@@ -15,6 +15,40 @@
     current version terrafrom  > 1.3-1.9 are latest
     state file stored in AWS S3/GCP Cloud storage
 
+# terraform folder structure
+
+    Inside terraform repo -> 
+      Modules , Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
+
+        project-root/
+        ├── .gitignore
+        ├── main.tf
+        ├── provider.tf
+        ├── variables.tf
+        ├── outputs.tf
+        ├── terraform.tfvars
+        ├── .terraform/                # Terraform-generated state and modules
+        ├── modules/                   # Reusable modules for different resources
+        │   ├── network/               # Network module (e.g., VPC, subnets)
+        │   ├── compute/               # Compute module (e.g., VM, instance groups)
+        │   └── storage/               # Storage module (e.g., Cloud Storage buckets)
+        ├── workspaces/                # Subdirectories for different workspaces
+        │   ├── dev/                   # Development workspace
+        │   │   ├── main.tf
+        │   │   ├── variables.tf
+        │   │   ├── terraform.tfvars
+        │   │   └── provider.tf        # Workspace-specific provider configurations
+        │   ├── staging/               # Staging workspace
+        │   │   ├── main.tf
+        │   │   ├── variables.tf
+        │   │   ├── terraform.tfvars
+        │   │   └── provider.tf
+        │   └── production/            # Production workspace
+        │       ├── main.tf
+        │       ├── variables.tf
+        │       ├── terraform.tfvars
+        │       └── provider.tf
+
 # Differences between Terraform Providers, WorkspacesModules, & Resources
 
     In simpler terms:
@@ -60,41 +94,6 @@
     - External metadata or attributes: Changes to the resource itself, like its labels (tags in AWS terminology). These can often be updated in place by the cloud provider's API. 
 
     Note: In most cases, adding or changing labels on a GCP VM instance in your Terraform configuration will not recreate the VM
-
-
-# terraform folder structure
-
-    Inside terraform repo -> 
-      Modules , Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
-
-        project-root/
-        ├── .gitignore
-        ├── main.tf
-        ├── provider.tf
-        ├── variables.tf
-        ├── outputs.tf
-        ├── terraform.tfvars
-        ├── .terraform/                # Terraform-generated state and modules
-        ├── modules/                   # Reusable modules for different resources
-        │   ├── network/               # Network module (e.g., VPC, subnets)
-        │   ├── compute/               # Compute module (e.g., VM, instance groups)
-        │   └── storage/               # Storage module (e.g., Cloud Storage buckets)
-        ├── workspaces/                # Subdirectories for different workspaces
-        │   ├── dev/                   # Development workspace
-        │   │   ├── main.tf
-        │   │   ├── variables.tf
-        │   │   ├── terraform.tfvars
-        │   │   └── provider.tf        # Workspace-specific provider configurations
-        │   ├── staging/               # Staging workspace
-        │   │   ├── main.tf
-        │   │   ├── variables.tf
-        │   │   ├── terraform.tfvars
-        │   │   └── provider.tf
-        │   └── production/            # Production workspace
-        │       ├── main.tf
-        │       ├── variables.tf
-        │       ├── terraform.tfvars
-        │       └── provider.tf
 
 
 # Terraform recreating vm with updating config

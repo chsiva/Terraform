@@ -163,7 +163,7 @@
 
 
 
-#Terraform Advance querstions
+#Terraform Advance questions
 
     - Drift Detection: Recognizing and addressing when your live infrastructure deviates from the desired state defined in your Terraform code, 
                        often caused by manual changes outside of Terraform's control.

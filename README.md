@@ -14,11 +14,23 @@
 
 # differences between Terraform Modules, Resources, Providers, and Workspaces in a simple way:
 
-In simpler terms:
-Providers: The tool that helps Terraform talk to a specific service (like GCP or AWS).
-Resources: The pieces of infrastructure you want to create (like a virtual machine or a database).
-Modules: Bundles of these pieces that you can easily reuse and share.
-Workspaces: Separate areas where you can deploy the same bundle of pieces (your configuration) for different purposes (like a "dev" environment and a "prod" environment) without them affecting each other's state.
+    In simpler terms:
+
+        Providers: Plugins/tools that helps Terraform to interact with specific service (like GCP or AWS).
+        Resources: Represents a single infrastructure object that you want to create (like a virtual machine or a database).
+        Modules: Container for multiple resources that you can easily reuse and share.
+        Workspaces: Separate areas where you can deploy the same bundle of pieces (your configuration) for different purposes (like a "dev" environment and a "prod" environment)
+        without them affecting each other's state.
+
+# create/execute/delete seperate workspace
+
+     terraform init
+     terraform workspace new <workspace-name>
+     terraform workspace list
+     terraform workspace select dev
+     terraform apply
+     terraform workspace delete <workspace-name>
+  
       
 # Updating Labels or Tags on an Immutable EC2 Instance:
 
@@ -26,6 +38,42 @@ Workspaces: Separate areas where you can deploy the same bundle of pieces (your 
     - Internal configuration changes: 
          Changes made inside the running EC2 instance (such as updating an application or patching the OS). These should be handled by replacing the instance.
     - External metadata or attributes: Changes to the resource itself, like its labels (tags in AWS terminology). These can often be updated in place by the cloud provider's API. 
+
+
+# terraform folder structure
+
+    Inside terraform repo -> 
+      Modules , Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
+
+        project-root/
+        ├── .gitignore
+        ├── main.tf
+        ├── provider.tf
+        ├── variables.tf
+        ├── outputs.tf
+        ├── terraform.tfvars
+        ├── .terraform/                # Terraform-generated state and modules
+        ├── modules/                   # Reusable modules for different resources
+        │   ├── network/               # Network module (e.g., VPC, subnets)
+        │   ├── compute/               # Compute module (e.g., VM, instance groups)
+        │   └── storage/               # Storage module (e.g., Cloud Storage buckets)
+        ├── workspaces/                # Subdirectories for different workspaces
+        │   ├── dev/                   # Development workspace
+        │   │   ├── main.tf
+        │   │   ├── variables.tf
+        │   │   ├── terraform.tfvars
+        │   │   └── provider.tf        # Workspace-specific provider configurations
+        │   ├── staging/               # Staging workspace
+        │   │   ├── main.tf
+        │   │   ├── variables.tf
+        │   │   ├── terraform.tfvars
+        │   │   └── provider.tf
+        │   └── production/            # Production workspace
+        │       ├── main.tf
+        │       ├── variables.tf
+        │       ├── terraform.tfvars
+        │       └── provider.tf
+
 
 #Terraform recreating vm with updating config
 
@@ -75,39 +123,6 @@ Workspaces: Separate areas where you can deploy the same bundle of pieces (your 
 
 
     
-# terraform folder structure
-
-    Inside terraform repo -> 
-      Modules , Providers, workspaces, main.tf, vars.tf, output.tf, backend.tf
-
-        project-root/
-        ├── .gitignore
-        ├── main.tf
-        ├── provider.tf
-        ├── variables.tf
-        ├── outputs.tf
-        ├── terraform.tfvars
-        ├── .terraform/                # Terraform-generated state and modules
-        ├── modules/                   # Reusable modules for different resources
-        │   ├── network/               # Network module (e.g., VPC, subnets)
-        │   ├── compute/               # Compute module (e.g., VM, instance groups)
-        │   └── storage/               # Storage module (e.g., Cloud Storage buckets)
-        ├── workspaces/                # Subdirectories for different workspaces
-        │   ├── dev/                   # Development workspace
-        │   │   ├── main.tf
-        │   │   ├── variables.tf
-        │   │   ├── terraform.tfvars
-        │   │   └── provider.tf        # Workspace-specific provider configurations
-        │   ├── staging/               # Staging workspace
-        │   │   ├── main.tf
-        │   │   ├── variables.tf
-        │   │   ├── terraform.tfvars
-        │   │   └── provider.tf
-        │   └── production/            # Production workspace
-        │       ├── main.tf
-        │       ├── variables.tf
-        │       ├── terraform.tfvars
-        │       └── provider.tf
 
 #TERRAFORM .tpl or .tftpl extension
 
@@ -406,4 +421,14 @@ But if you want to contribute to the provider, and implement or fix bugs in it, 
 }
 
 # So you could have a .vars file with Vpc value and calling this in main.tf
+
+# Is terraform only for cloud services
+
+    In essence, if a platform or service has an accessible API, Terraform can likely manage it through a provider. 
+    This means you can use Terraform to:
+    Provision and manage on-premises resources: Such as virtual machines in your data center, network devices, and storage systems.
+    Manage SaaS platforms: Configure and automate the setup of various SaaS applications.
+    Orchestrate containerized applications: Deploy and manage container orchestration platforms like Kubernetes.
+    Manage local development environments: Provision local Docker containers and other resources for development purposes. 
+    In conclusion, Terraform's provider model allows it to go beyond cloud services and manage infrastructure and services across diverse environments. 
 

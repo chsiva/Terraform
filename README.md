@@ -178,10 +178,20 @@
 
     * incompatible with provider version - module of GCP outdated
     
-    * Error code 409 - Resource not found
+    * Error code 409 - Resource already Exists
+        verify statefile & manually on UI/Console
+        terraform import if the sync b/w statefile and ui is not matching
+
+     * Error code 404 - Resource not found
+         verify statefile & manually on UI/Console
        Remove Resource from State:
           If the conflict is due to an interrupted apply or inconsistent state, 
               you might need to use terraform state rm <resource_name> to remove the resource from the state and then terraform import to re-add it correctly.
+
+              Avoid Manual Changes: 
+              It's generally recommended to manage your infrastructure solely through Terraform to prevent state drift and maintain consistency.
+              Use Remote State and Locking
+              Regularly Sync State: Periodically run terraform plan to compare your configuration with the actual infrastructure and identify any discrepancies. 
 
 
 

@@ -12,32 +12,51 @@
     current version terrafrom  > 1.3-1.9 are latest
     state file stored in AWS S3/GCP Cloud storage
 
-# differences between Terraform Modules, Resources, Providers, and Workspaces in a simple way:
+# Differences between Terraform Providers, WorkspacesModules, & Resources
 
     In simpler terms:
 
-        Providers: Plugins/tools that helps Terraform to interact with specific service (like GCP or AWS).
-        Resources: Represents a single infrastructure object that you want to create (like a virtual machine or a database).
-        Modules: Container for multiple resources that you can easily reuse and share.
-        Workspaces: Separate areas where you can deploy the same bundle of pieces (your configuration) for different purposes (like a "dev" environment and a "prod" environment)
-        without them affecting each other's state.
+        - Providers: Plugins/tools that helps Terraform to interact with specific service (like GCP or AWS).
 
-# create/execute/delete seperate workspace
+        - Workspaces: Separate areas where you can deploy the same bundle of pieces (your configuration) for different purposes 
+               (like a "dev" environment and a "prod" environment) without them affecting each other's state.
 
-     terraform init
-     terraform workspace new <workspace-name>
-     terraform workspace list
-     terraform workspace select dev
-     terraform apply
-     terraform workspace delete <workspace-name>
-  
-      
+                # create/execute/delete seperate workspace
+
+                         terraform init
+                         terraform workspace new <workspace-name>
+                         terraform workspace list
+                         terraform workspace select dev
+                         terraform apply
+                         terraform workspace delete <workspace-name>
+
+        - Modules: Container for multiple resources that you can easily reuse and share.
+          Module Structure:
+            .
+            ├── main.tf
+            ├── variables.tf
+            ├── outputs.tf
+            ├── README.md
+
+        - Resources: Represents a single infrastructure object that you want to create (like a virtual machine or a database).
+
+            terraform
+            resource "google_compute_instance" "my_vm" {
+              name         = "webserver-instance"
+              machine_type = "e2-medium"
+              zone         = "us-central1-a"
+              # ... other configuration arguments
+            }     
+            
+
 # Updating Labels or Tags on an Immutable EC2 Instance:
 
     This is where the concept of immutability might seem to conflict with direct updates:
     - Internal configuration changes: 
          Changes made inside the running EC2 instance (such as updating an application or patching the OS). These should be handled by replacing the instance.
     - External metadata or attributes: Changes to the resource itself, like its labels (tags in AWS terminology). These can often be updated in place by the cloud provider's API. 
+
+    Note: In most cases, adding or changing labels on a GCP VM instance in your Terraform configuration will not recreate the VM
 
 
 # terraform folder structure
@@ -75,7 +94,7 @@
         │       └── provider.tf
 
 
-#Terraform recreating vm with updating config
+# Terraform recreating vm with updating config
 
     When you run terraform apply with this updated configuration,
        Terraform will plan to destroy the old instance and create a new one with the new AMI. 
@@ -84,11 +103,11 @@
 # Avoid dataloss
     seperate data volume [ persistent volumes (like EBS volumes in AWS) ]
     Attach old data voulmes this to new VM
-    Mount Volumes Without Reformatting: 
+    Mount Volumes Without Reformatting means without erasing or changing the existing data on that volume
     Backup and Recovery Strategies like "snapshot"
     prevent_destroy = true # this will block perform action but will not create a new vm as well
 
-#Avoid other users to remove/release lock
+# Avoid other users to remove/release lock
 
    How it works (example with GCS bucket):  lockfile will be 
    
@@ -119,11 +138,6 @@
             $aws dynamodb scan --table-name <your_lock_table_name> --profile=<your_aws_profile>
 
            
-
-
-
-    
-
 #TERRAFORM .tpl or .tftpl extension
 
     In Terraform, a file with a .tpl or .tftpl extension is typically a template file. 

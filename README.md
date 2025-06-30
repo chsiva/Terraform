@@ -138,7 +138,7 @@
             $aws dynamodb scan --table-name <your_lock_table_name> --profile=<your_aws_profile>
 
            
-#TERRAFORM .tpl or .tftpl extension
+# TERRAFORM .tpl or .tftpl extension
 
     In Terraform, a file with a .tpl or .tftpl extension is typically a template file. 
     These template files are used to dynamically generate text-based content, 

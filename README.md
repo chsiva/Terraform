@@ -458,3 +458,35 @@ But if you want to contribute to the provider, and implement or fix bugs in it, 
     Manage local development environments: Provision local Docker containers and other resources for development purposes. 
     In conclusion, Terraform's provider model allows it to go beyond cloud services and manage infrastructure and services across diverse environments. 
 
+
+    
+# .sentifile file written to enforce tagging on gcsbucket creation
+
+https://developer.hashicorp.com/terraform/tutorials/policy/sentinel-cloud-integration
+
+        # Import the tfplan/v2 import to access the Terraform plan
+        import "tfplan/v2" as tfplan
+        
+        # Define a list of mandatory tag keys
+        mandatory_tags = ["environment", "owner", "cost_center"]
+        
+        # Helper function to find GCS buckets in the plan
+        find_gcs_buckets = func() {
+          gcs_buckets = filter tfplan.resource_changes as address, rc {
+            rc.provider_name is "registry.terraform.io/hashicorp/google" and
+            rc.mode is "managed" and
+            rc.type is "google_storage_bucket" and
+            rc.change.actions contains "create"
+          }
+          return gcs_buckets
+        }
+        
+        # Main rule to check for mandatory tags
+        main = rule {
+          all find_gcs_buckets() as _, bucket {
+            bucket.change.after.labels else {} contains mandatory_tags
+          }
+        }
+
+        
+
